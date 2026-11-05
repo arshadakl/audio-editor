@@ -1,0 +1,23 @@
+# CraftSound Audio Workstation & Editor (mix.arshadakl.in)
+
+> CraftSound is a modern, free, browser-based multitrack audio editor, trimmer, and merger. It runs entirely client-side using Web Audio API and IndexedDB without uploading audio files to external servers.
+
+- **Website**: https://mix.arshadakl.in/
+- **Creator / Developer**: Arshad (https://arshadakl.in)
+- **License**: MIT License (Open Source)
+- **Repository**: https://github.com/arshadakl/audio-editor
+
+## Core Capabilities
+- **Audio Trimmer**: Cut, crop, and trim MP3, WAV, OGG, FLAC, M4A, and AAC files directly in browser with millisecond accuracy.
+- **Audio Merger & Multitrack Mixer**: Layer multiple audio tracks simultaneously with individual volume, stereo panning, mute, and solo controls.
+- **Audio Splitter**: Split audio clips cleanly at the playhead position without quality degradation.
+- **Waveform Visualizer**: High-resolution interactive canvas waveform display with peak analysis.
+- **Offline & Private**: Audio files never leave your device. All decoding, processing, and rendering happen inside the client browser.
+- **Export Formats**: Studio-grade uncompressed WAV (16-bit / 24-bit PCM at 44.1kHz or 48kHz) and MP3 (up to 320 kbps).
+- **Zero Server Uploads**: Complete privacy guaranteed for podcasts, music production, voice recordings, and sensitive audio.
+
+## Links & Guides
+- [Online Audio Trimming Guide](https://mix.arshadakl.in/#trim): Step-by-step instructions for lossless in-browser audio cutting.
+- [Audio Merger Guide](https://mix.arshadakl.in/#merge): How to combine and mix multiple tracks into one audio file.
+- [Privacy Policy](https://mix.arshadakl.in/#privacy): Details on zero-data collection and local IndexedDB storage.
+- [About the Creator](https://arshadakl.in): Portfolio and projects by Arshad.

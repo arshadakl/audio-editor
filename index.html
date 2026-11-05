@@ -3,17 +3,150 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <title>CraftSound Audio Editor</title>
+    
+    <!-- Primary SEO Title & Meta -->
+    <title>CraftSound - Free Online Audio Editor, Trimmer & Multitrack Merger</title>
+    <meta name="description" content="Free online audio editor, trimmer, and multitrack merger. Cut, split, mix, and edit audio files directly in your browser with zero server uploads. Export studio-grade WAV and MP3 privately. Created by arshadakl.in." />
+    <meta name="keywords" content="audio editor, online audio editor, audio trimmer, trim audio online, merge audio, audio merger, split audio, cut mp3 online, audio mixer browser, free audio editor, web audio workstation, arshadakl" />
+    <meta name="author" content="Arshad (arshadakl.in)" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href="https://mix.arshadakl.in/" />
+
+    <!-- Favicon & Touch Icons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="description" content="A minimal, professional browser-based multitrack audio editor and merger with timeline editing, trimming, splitting, and high-fidelity export." />
-    <meta property="og:title" content="CraftSound Audio Editor" />
-    <meta property="og:description" content="A minimal, professional browser-based multitrack audio editor and merger with timeline editing, trimming, splitting, and high-fidelity export." />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <meta name="theme-color" content="#0f172a" />
+
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mix.arshadakl.in/" />
+    <meta property="og:site_name" content="CraftSound Audio Workstation" />
+    <meta property="og:title" content="CraftSound - Free Online Audio Editor, Trimmer & Multitrack Merger" />
+    <meta property="og:description" content="Trim, split, merge, and edit audio tracks online for free. 100% private in-browser Web Audio DAW with high-fidelity WAV & MP3 export. Created by arshadakl.in." />
+    <meta property="og:image" content="https://mix.arshadakl.in/og-banner.svg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="CraftSound Audio Editor banner" />
+
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://mix.arshadakl.in/" />
+    <meta name="twitter:title" content="CraftSound - Free Online Audio Editor, Trimmer & Multitrack Merger" />
+    <meta name="twitter:description" content="Trim, split, merge, and edit audio tracks in your browser. 100% private Web Audio DAW with lossless export. Created by arshadakl.in." />
+    <meta name="twitter:image" content="https://mix.arshadakl.in/og-banner.svg" />
+    <meta name="twitter:creator" content="@arshadakl" />
+
+    <!-- Structured Data (JSON-LD) for Google Rich Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://mix.arshadakl.in/#app",
+          "name": "CraftSound Audio Editor",
+          "url": "https://mix.arshadakl.in/",
+          "description": "Free, browser-based multitrack audio editor, trimmer, and merger with real-time waveform visualization and high-fidelity WAV/MP3 export.",
+          "applicationCategory": "MultimediaApplication",
+          "operatingSystem": "All (Web Browser)",
+          "browserRequirements": "Requires JavaScript and HTML5 Web Audio API support",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "featureList": [
+            "Lossless audio trimming and edge resizing",
+            "Playhead-accurate clip splitting",
+            "Multitrack audio merging and stem mixing",
+            "Interactive audio waveform visualizer",
+            "Offline-first client-side audio rendering",
+            "High-quality 16/24-bit WAV and MP3 export up to 320 kbps",
+            "Zero server upload policy for complete privacy"
+          ],
+          "creator": {
+            "@type": "Person",
+            "name": "Arshad",
+            "url": "https://arshadakl.in"
+          }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://arshadakl.in/#organization",
+          "name": "arshadakl.in",
+          "url": "https://arshadakl.in",
+          "logo": "https://mix.arshadakl.in/favicon.svg"
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://mix.arshadakl.in/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Is CraftSound free to use for trimming and editing audio?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, CraftSound is 100% free with no file upload limits, subscriptions, or watermarks. It runs locally in your browser using the Web Audio API."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does CraftSound upload my audio files to a remote server?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. CraftSound performs all decoding, waveform analysis, multitrack mixing, and MP3/WAV encoding client-side directly on your device. Your audio files are completely private and never uploaded anywhere."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I merge multiple audio tracks together?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Import your audio files into the library, add them to timeline tracks, arrange and trim them as desired, then click 'Export Audio' to mix down all tracks into a single WAV or MP3 file."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What audio formats are supported?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "CraftSound supports importing MP3, WAV, OGG, FLAC, M4A, AAC, WebM, OPUS, and AIFF files, and exports directly to studio-grade WAV and MP3."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- Hidden Semantic Content for Search Engine Web Crawlers -->
+    <noscript>
+      <header>
+        <h1>CraftSound - Free Online Audio Editor, Trimmer &amp; Multitrack Merger</h1>
+        <p>A professional browser-based audio workstation by <a href="https://arshadakl.in">arshadakl.in</a>.</p>
+      </header>
+      <main>
+        <section>
+          <h2>Free Online Audio Trimmer &amp; Cutter</h2>
+          <p>Trim MP3 and WAV files with millisecond accuracy directly inside your browser. No server uploads, zero quality loss.</p>
+        </section>
+        <section>
+          <h2>Multitrack Audio Merger &amp; Mixer</h2>
+          <p>Combine multiple audio recordings, voiceovers, podcast stems, and music tracks into a single unified audio file.</p>
+        </section>
+        <section>
+          <h2>100% Private Offline Audio Processing</h2>
+          <p>Powered by the Web Audio API and IndexedDB. Your private recordings never leave your machine.</p>
+        </section>
+      </main>
+      <footer>
+        <p>Created by <a href="https://arshadakl.in">Arshad (arshadakl.in)</a>. Hosted at <a href="https://mix.arshadakl.in">mix.arshadakl.in</a>.</p>
+      </footer>
+    </noscript>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

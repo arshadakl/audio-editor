@@ -37,6 +37,7 @@ import { Timeline } from './features/timeline/components/Timeline';
 import { PlaybackControls } from './features/playback/components/PlaybackControls';
 import { ExportDialog } from './features/export/components/ExportDialog';
 import { DeleteProjectDialog } from './features/project/components/DeleteProjectDialog';
+import { SeoModals, type SeoModalTab } from './components/seo/SeoModals';
 
 export default function App() {
   // Theme State
@@ -81,6 +82,17 @@ export default function App() {
   const [isExportOpen, setIsExportOpen] = useState(false);
   const [isDeleteProjectOpen, setIsDeleteProjectOpen] = useState(false);
   const [isMobileLibraryOpen, setIsMobileLibraryOpen] = useState(false);
+  const [activeSeoModalTab, setActiveSeoModalTab] = useState<SeoModalTab | null>(() => {
+    // Check URL hash for direct deep linking e.g. #guides, #trim, #about, #privacy
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash.toLowerCase();
+      if (hash === '#about') return 'about';
+      if (hash === '#privacy') return 'privacy';
+      if (hash === '#terms') return 'terms';
+      if (hash === '#guides' || hash === '#trim' || hash === '#merge' || hash === '#split') return 'guides';
+    }
+    return null;
+  });
   const [exportProgress, setExportProgress] = useState<ExportProgressInfo>({
     stage: 'idle',
     percent: 0,
@@ -690,6 +702,7 @@ export default function App() {
         onOpenDeleteProject={() => setIsDeleteProjectOpen(true)}
         onToggleMobileLibrary={() => setIsMobileLibraryOpen((prev) => !prev)}
         assetCount={assets.length}
+        onOpenSeoModal={(tab) => setActiveSeoModalTab(tab)}
       />
 
       {/* Main Workspace Area (Audio Library + Timeline) */}
@@ -759,6 +772,7 @@ export default function App() {
         onSetPlaybackRate={setPlaybackRate}
         onSkipBackward={handleSkipBackward}
         onSkipForward={handleSkipForward}
+        onOpenSeoModal={(tab) => setActiveSeoModalTab(tab)}
       />
 
       {/* Export Dialog */}
@@ -781,6 +795,13 @@ export default function App() {
         projectName={project.name}
         onDeleteCurrentProject={handleDeleteCurrentProject}
         onClearAllLocalData={handleClearAllLocalData}
+      />
+
+      {/* Educational Guides, About & Privacy SEO Modals */}
+      <SeoModals
+        activeTab={activeSeoModalTab}
+        onClose={() => setActiveSeoModalTab(null)}
+        onOpenTab={(tab) => setActiveSeoModalTab(tab)}
       />
     </div>
   );

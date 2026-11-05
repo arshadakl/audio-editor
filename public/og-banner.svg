@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120" />
+      <stop offset="50%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#1e1b4b" />
+    </linearGradient>
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#c084fc" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.9" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)" />
+
+  <!-- Subtle Wave Grid Background -->
+  <g opacity="0.12" stroke="#38bdf8" stroke-width="1.5">
+    <path d="M0,150 Q300,50 600,150 T1200,150" fill="none" />
+    <path d="M0,300 Q300,200 600,300 T1200,300" fill="none" />
+    <path d="M0,450 Q300,350 600,450 T1200,450" fill="none" />
+  </g>
+
+  <!-- Central Card -->
+  <rect x="80" y="80" width="1040" height="470" rx="24" fill="url(#cardGrad)" stroke="#334155" stroke-width="2" />
+
+  <!-- App Icon -->
+  <rect x="140" y="140" width="80" height="80" rx="20" fill="url(#primaryGrad)" />
+  <!-- Wave Bars in Icon -->
+  <rect x="156" y="168" width="6" height="24" rx="3" fill="#0f172a" />
+  <rect x="168" y="156" width="6" height="48" rx="3" fill="#0f172a" />
+  <rect x="180" y="148" width="6" height="64" rx="3" fill="#0f172a" />
+  <rect x="192" y="160" width="6" height="40" rx="3" fill="#0f172a" />
+  <rect x="204" y="172" width="6" height="16" rx="3" fill="#0f172a" />
+
+  <!-- Title & Subtitle -->
+  <text x="245" y="185" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="44" font-weight="800" fill="#ffffff" letter-spacing="-1">CraftSound</text>
+  <text x="245" y="215" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="600" fill="#38bdf8">Free Online Audio Editor &amp; Multitrack Workstation</text>
+
+  <!-- Big Pitch Headline -->
+  <text x="140" y="300" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="700" fill="#f8fafc" letter-spacing="-0.5">
+    Trim, Split &amp; Merge Audio Online
+  </text>
+  <text x="140" y="340" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="400" fill="#94a3b8">
+    100% Client-Side in Your Browser · Zero Server Uploads · Lossless MP3 &amp; WAV Export
+  </text>
+
+  <!-- Feature Badges -->
+  <g transform="translate(140, 385)">
+    <!-- Badge 1 -->
+    <rect x="0" y="0" width="160" height="40" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5" />
+    <text x="80" y="25" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="600" fill="#e2e8f0">✂ Audio Trimmer</text>
+
+    <!-- Badge 2 -->
+    <rect x="175" y="0" width="170" height="40" rx="10" fill="#1e293b" stroke="#818cf8" stroke-width="1.5" />
+    <text x="260" y="25" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="600" fill="#e2e8f0">🎚 Multitrack Merger</text>
+
+    <!-- Badge 3 -->
+    <rect x="360" y="0" width="170" height="40" rx="10" fill="#1e293b" stroke="#c084fc" stroke-width="1.5" />
+    <text x="445" y="25" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="600" fill="#e2e8f0">⚡ 100% Offline Private</text>
+
+    <!-- Badge 4 -->
+    <rect x="545" y="0" width="170" height="40" rx="10" fill="#1e293b" stroke="#34d399" stroke-width="1.5" />
+    <text x="630" y="25" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="600" fill="#e2e8f0">💾 Export WAV &amp; MP3</text>
+  </g>
+
+  <!-- Domain & Creator Attribution -->
+  <line x1="140" y1="465" x2="1020" y2="465" stroke="#334155" stroke-width="1" />
+  <text x="140" y="500" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="700" fill="#38bdf8">mix.arshadakl.in</text>
+  <text x="1020" y="500" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="500" fill="#94a3b8">
+    Crafted with precision by <tspan font-weight="700" fill="#f8fafc">arshadakl.in</tspan>
+  </text>
+</svg>

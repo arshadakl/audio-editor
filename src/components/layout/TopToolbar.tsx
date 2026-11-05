@@ -12,8 +12,11 @@ import {
   MousePointer,
   FolderX,
   Music,
+  HelpCircle,
+  ExternalLink,
 } from 'lucide-react';
 import { Tooltip } from '../ui/Tooltip';
+import type { SeoModalTab } from '../seo/SeoModals';
 
 interface TopToolbarProps {
   projectName: string;
@@ -32,6 +35,7 @@ interface TopToolbarProps {
   onOpenDeleteProject: () => void;
   onToggleMobileLibrary?: () => void;
   assetCount?: number;
+  onOpenSeoModal?: (tab: SeoModalTab) => void;
 }
 
 export const TopToolbar: React.FC<TopToolbarProps> = ({
@@ -51,6 +55,7 @@ export const TopToolbar: React.FC<TopToolbarProps> = ({
   onOpenDeleteProject,
   onToggleMobileLibrary,
   assetCount = 0,
+  onOpenSeoModal,
 }) => {
   const [isEditingName, setIsEditingName] = useState(false);
   const [tempName, setTempName] = useState(projectName);
@@ -199,8 +204,34 @@ export const TopToolbar: React.FC<TopToolbarProps> = ({
         </Tooltip>
       </div>
 
-      {/* Right: Theme Toggle, Project Menu, Export CTA */}
+      {/* Right: Creator Attribution, SEO Guides, Theme Toggle, Export CTA */}
       <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+        {/* Creator Attribution Link to arshadakl.in */}
+        <a
+          href="https://arshadakl.in"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden lg:flex items-center gap-1 px-2 py-1 rounded text-[11px] font-medium text-[var(--text-secondary)] hover:text-[var(--primary-accent)] hover:bg-[var(--surface-base)] transition-colors"
+          title="Designed and developed by arshadakl.in"
+        >
+          <span>by</span>
+          <span className="font-semibold text-[var(--text-primary)] hover:text-[var(--primary-accent)]">arshadakl.in</span>
+          <ExternalLink className="w-3 h-3 opacity-60" />
+        </a>
+
+        {/* Guides & About Dialog Button */}
+        {onOpenSeoModal && (
+          <Tooltip content="How to Trim, Merge & Guides">
+            <button
+              onClick={() => onOpenSeoModal('guides')}
+              className="p-1.5 rounded text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-base)] transition-colors"
+              aria-label="Guides & About"
+            >
+              <HelpCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            </button>
+          </Tooltip>
+        )}
+
         <Tooltip content="Project Options & Cleanup">
           <button
             onClick={onOpenDeleteProject}

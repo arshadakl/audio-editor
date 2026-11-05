@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { formatTime } from '../../../utils/format-time';
 import { Tooltip } from '../../../components/ui/Tooltip';
+import type { SeoModalTab } from '../../../components/seo/SeoModals';
 
 interface PlaybackControlsProps {
   isPlaying: boolean;
@@ -24,6 +25,7 @@ interface PlaybackControlsProps {
   onSetPlaybackRate: (rate: number) => void;
   onSkipBackward: () => void;
   onSkipForward: () => void;
+  onOpenSeoModal?: (tab: SeoModalTab) => void;
 }
 
 export const PlaybackControls: React.FC<PlaybackControlsProps> = ({
@@ -39,6 +41,7 @@ export const PlaybackControls: React.FC<PlaybackControlsProps> = ({
   onSetPlaybackRate,
   onSkipBackward,
   onSkipForward,
+  onOpenSeoModal,
 }) => {
   const progressPercent = totalDuration > 0 ? Math.min(100, (playheadTime / totalDuration) * 100) : 0;
 
@@ -75,7 +78,7 @@ export const PlaybackControls: React.FC<PlaybackControlsProps> = ({
       </div>
 
       <div className="h-13 sm:h-14 px-2 sm:px-4 flex items-center justify-between gap-2 sm:gap-4">
-        {/* Left: Time and Progress */}
+        {/* Left: Time and Progress & Attribution */}
         <div className="flex items-center gap-2 shrink-0">
           <div className="font-mono text-[11px] sm:text-xs tabular-nums font-semibold tracking-tight text-[var(--text-primary)]">
             <span>{formatTime(playheadTime, true)}</span>
@@ -83,6 +86,44 @@ export const PlaybackControls: React.FC<PlaybackControlsProps> = ({
             <span className="text-[var(--text-secondary)] font-normal hidden xs:inline sm:inline">
               {formatTime(totalDuration, true)}
             </span>
+          </div>
+
+          {/* Discreet footer attribution for SEO & branding */}
+          <div className="hidden xl:flex items-center gap-2 pl-3 border-l border-[var(--border-default)] text-[10px] text-[var(--text-muted)]">
+            <a
+              href="https://mix.arshadakl.in"
+              className="hover:text-[var(--text-primary)] transition-colors font-mono"
+            >
+              mix.arshadakl.in
+            </a>
+            <span>·</span>
+            <span>Created by</span>
+            <a
+              href="https://arshadakl.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-[var(--text-secondary)] hover:text-[var(--primary-accent)] transition-colors"
+            >
+              arshadakl.in
+            </a>
+            {onOpenSeoModal && (
+              <>
+                <span>·</span>
+                <button
+                  onClick={() => onOpenSeoModal('privacy')}
+                  className="hover:underline text-[var(--text-muted)]"
+                >
+                  Privacy
+                </button>
+                <span>·</span>
+                <button
+                  onClick={() => onOpenSeoModal('guides')}
+                  className="hover:underline text-[var(--text-muted)]"
+                >
+                  Guides
+                </button>
+              </>
+            )}
           </div>
         </div>
 
