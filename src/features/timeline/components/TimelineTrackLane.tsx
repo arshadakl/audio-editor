@@ -12,10 +12,10 @@ interface TimelineTrackLaneProps {
   pixelsPerSecond: number;
   totalWidth: number;
   selectedClipIds: Set<string>;
-  onSelectClip: (e: React.MouseEvent, clipId: string) => void;
-  onClipDragStart: (e: React.MouseEvent, clipId: string, trackId: string) => void;
-  onClipTrimLeftStart: (e: React.MouseEvent, clipId: string) => void;
-  onClipTrimRightStart: (e: React.MouseEvent, clipId: string) => void;
+  onSelectClip: (e: React.MouseEvent | React.PointerEvent, clipId: string) => void;
+  onClipDragStart: (e: React.PointerEvent | React.MouseEvent, clipId: string, trackId: string) => void;
+  onClipTrimLeftStart: (e: React.PointerEvent | React.MouseEvent, clipId: string) => void;
+  onClipTrimRightStart: (e: React.PointerEvent | React.MouseEvent, clipId: string) => void;
   onUpdateTrack: (updated: TimelineTrack) => void;
   onDeleteTrack: (trackId: string) => void;
   canDeleteTrack: boolean;
@@ -58,10 +58,10 @@ export const TimelineTrackLane: React.FC<TimelineTrackLaneProps> = ({
 
   return (
     <div className="flex border-b border-[var(--border-default)] group/track">
-      {/* Track Control Header (Left) */}
-      <div className="w-56 shrink-0 bg-[var(--surface-raised)] border-r border-[var(--border-default)] p-2.5 flex flex-col justify-between select-none">
+      {/* Track Control Header (Left) - Responsive width */}
+      <div className="w-32 sm:w-44 md:w-56 shrink-0 bg-[var(--surface-raised)] border-r border-[var(--border-default)] p-1.5 sm:p-2.5 flex flex-col justify-between select-none">
         <div className="flex items-center justify-between gap-1">
-          <span className="text-xs font-semibold text-[var(--text-primary)] truncate">
+          <span className="text-[11px] sm:text-xs font-semibold text-[var(--text-primary)] truncate">
             {track.name || `Track ${trackIndex + 1}`}
           </span>
 
@@ -69,7 +69,7 @@ export const TimelineTrackLane: React.FC<TimelineTrackLaneProps> = ({
             <Tooltip content="Delete Track">
               <button
                 onClick={() => onDeleteTrack(track.id)}
-                className="opacity-0 group-hover/track:opacity-100 p-1 text-[var(--text-muted)] hover:text-[var(--destructive)] hover:bg-[var(--surface-base)] rounded transition-all"
+                className="opacity-70 sm:opacity-0 sm:group-hover/track:opacity-100 p-1 text-[var(--text-muted)] hover:text-[var(--destructive)] hover:bg-[var(--surface-base)] rounded transition-all"
                 aria-label="Delete Track"
               >
                 <Trash2 className="w-3.5 h-3.5" />
@@ -79,8 +79,8 @@ export const TimelineTrackLane: React.FC<TimelineTrackLaneProps> = ({
         </div>
 
         {/* Track Mute, Solo, Volume Controls */}
-        <div className="flex items-center justify-between gap-2 mt-2">
-          <div className="flex items-center gap-1">
+        <div className="flex items-center justify-between gap-1.5 sm:gap-2 mt-1 sm:mt-2">
+          <div className="flex items-center gap-0.5 sm:gap-1 shrink-0">
             <button
               onClick={() => onUpdateTrack({ ...track, muted: !track.muted })}
               className={`w-5 h-5 rounded text-[10px] font-bold flex items-center justify-center transition-colors border ${
@@ -106,11 +106,11 @@ export const TimelineTrackLane: React.FC<TimelineTrackLaneProps> = ({
           </div>
 
           {/* Volume slider */}
-          <div className="flex items-center gap-1.5 flex-1 max-w-[110px]">
+          <div className="flex items-center gap-1 flex-1 max-w-[65px] sm:max-w-[110px]">
             {track.volume === 0 || track.muted ? (
-              <VolumeX className="w-3.5 h-3.5 text-[var(--text-muted)] shrink-0" />
+              <VolumeX className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[var(--text-muted)] shrink-0 hidden xs:inline" />
             ) : (
-              <Volume2 className="w-3.5 h-3.5 text-[var(--text-secondary)] shrink-0" />
+              <Volume2 className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[var(--text-secondary)] shrink-0 hidden xs:inline" />
             )}
             <input
               type="range"

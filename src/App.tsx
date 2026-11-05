@@ -77,9 +77,10 @@ export default function App() {
   const [masterVolume, setMasterVolume] = useState<number>(1);
   const [playbackRate, setPlaybackRate] = useState<number>(1);
 
-  // Dialogs
+  // Dialogs & Mobile Drawers
   const [isExportOpen, setIsExportOpen] = useState(false);
   const [isDeleteProjectOpen, setIsDeleteProjectOpen] = useState(false);
+  const [isMobileLibraryOpen, setIsMobileLibraryOpen] = useState(false);
   const [exportProgress, setExportProgress] = useState<ExportProgressInfo>({
     stage: 'idle',
     percent: 0,
@@ -670,7 +671,7 @@ export default function App() {
   }
 
   return (
-    <div className="flex flex-col h-screen w-screen overflow-hidden bg-[var(--surface-base)] text-[var(--text-primary)]">
+    <div className="flex flex-col h-screen h-[100dvh] w-screen overflow-hidden bg-[var(--surface-base)] text-[var(--text-primary)]">
       {/* Top Application Toolbar */}
       <TopToolbar
         projectName={project.name}
@@ -687,19 +688,41 @@ export default function App() {
         onToggleTheme={() => setIsDarkTheme(!isDarkTheme)}
         onOpenExport={() => setIsExportOpen(true)}
         onOpenDeleteProject={() => setIsDeleteProjectOpen(true)}
+        onToggleMobileLibrary={() => setIsMobileLibraryOpen((prev) => !prev)}
+        assetCount={assets.length}
       />
 
       {/* Main Workspace Area (Audio Library + Timeline) */}
-      <div className="flex-1 flex overflow-hidden">
-        {/* Left: Audio Library Panel */}
-        <AudioLibraryPanel
-          assets={assets}
-          onImportFiles={handleImportFiles}
-          onAddClipToTimeline={handleAddClipToTimeline}
-          onDeleteAsset={handleDeleteAsset}
-          onLoadDemoSounds={handleLoadDemoSounds}
-          isImporting={isImporting}
-        />
+      <div className="flex-1 flex overflow-hidden relative">
+        {/* Audio Library Panel: Drawer on mobile, sidebar on desktop */}
+        <div
+          className={`
+            fixed inset-y-0 left-0 z-40 w-72 max-w-[85vw] transform transition-transform duration-200 ease-in-out md:static md:w-72 md:translate-x-0
+            ${isMobileLibraryOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full md:translate-x-0'}
+          `}
+        >
+          <AudioLibraryPanel
+            assets={assets}
+            onImportFiles={handleImportFiles}
+            onAddClipToTimeline={(assetId) => {
+              handleAddClipToTimeline(assetId);
+              // Auto-close drawer on mobile once added
+              setIsMobileLibraryOpen(false);
+            }}
+            onDeleteAsset={handleDeleteAsset}
+            onLoadDemoSounds={handleLoadDemoSounds}
+            isImporting={isImporting}
+            onCloseMobile={() => setIsMobileLibraryOpen(false)}
+          />
+        </div>
+
+        {/* Mobile Backdrop overlay */}
+        {isMobileLibraryOpen && (
+          <div
+            className="fixed inset-0 z-30 bg-black/50 backdrop-blur-xs md:hidden"
+            onClick={() => setIsMobileLibraryOpen(false)}
+          />
+        )}
 
         {/* Center: Multitrack Timeline Workspace */}
         <Timeline

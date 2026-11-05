@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Upload, Plus, Trash2, Music, Sparkles, AlertCircle } from 'lucide-react';
+import { Upload, Plus, Trash2, Music, Sparkles, AlertCircle, X } from 'lucide-react';
 import type { AudioAsset } from '../../../types';
 import { formatDuration } from '../../../utils/format-time';
 import { formatFileSize } from '../../../utils/format-file-size';
@@ -14,6 +14,7 @@ interface AudioLibraryPanelProps {
   onDeleteAsset: (assetId: string) => void;
   onLoadDemoSounds: () => Promise<void>;
   isImporting: boolean;
+  onCloseMobile?: () => void;
 }
 
 export const AudioLibraryPanel: React.FC<AudioLibraryPanelProps> = ({
@@ -23,6 +24,7 @@ export const AudioLibraryPanel: React.FC<AudioLibraryPanelProps> = ({
   onDeleteAsset,
   onLoadDemoSounds,
   isImporting,
+  onCloseMobile,
 }) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [isDragOver, setIsDragOver] = useState(false);
@@ -72,23 +74,34 @@ export const AudioLibraryPanel: React.FC<AudioLibraryPanelProps> = ({
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
-      className={`w-72 shrink-0 border-r border-[var(--border-default)] bg-[var(--surface-base)] flex flex-col h-full select-none transition-colors ${
+      className={`w-full md:w-72 shrink-0 md:border-r border-[var(--border-default)] bg-[var(--surface-base)] flex flex-col h-full select-none transition-colors ${
         isDragOver ? 'ring-2 ring-inset ring-[var(--primary-accent)]' : ''
       }`}
     >
       {/* Header */}
-      <div className="h-12 px-4 border-b border-[var(--border-default)] flex items-center justify-between">
+      <div className="h-12 px-4 border-b border-[var(--border-default)] flex items-center justify-between shrink-0">
         <div className="flex items-center gap-2">
           <Music className="w-4 h-4 text-[var(--primary-accent)]" />
           <h2 className="text-xs font-semibold text-[var(--text-primary)]">Audio Library</h2>
         </div>
-        <span className="text-[11px] tabular-nums font-medium text-[var(--text-muted)]">
-          {assets.length} {assets.length === 1 ? 'file' : 'files'}
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="text-[11px] tabular-nums font-medium text-[var(--text-muted)]">
+            {assets.length} {assets.length === 1 ? 'file' : 'files'}
+          </span>
+          {onCloseMobile && (
+            <button
+              onClick={onCloseMobile}
+              className="md:hidden p-1.5 rounded text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-raised)] transition-colors"
+              aria-label="Close audio library drawer"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Import Action Area */}
-      <div className="p-3 border-b border-[var(--border-default)] space-y-2">
+      <div className="p-3 border-b border-[var(--border-default)] space-y-2 shrink-0">
         <input
           ref={fileInputRef}
           type="file"
@@ -153,11 +166,11 @@ export const AudioLibraryPanel: React.FC<AudioLibraryPanelProps> = ({
               className="group p-2.5 rounded-lg border border-[var(--border-default)] bg-[var(--surface-card)] hover:border-[var(--primary-accent)] transition-all cursor-grab active:cursor-grabbing shadow-2xs"
             >
               <div className="flex items-start justify-between gap-1 mb-1.5">
-                <div className="min-w-0">
+                <div className="min-w-0 flex-1">
                   <p className="text-xs font-medium text-[var(--text-primary)] truncate" title={asset.name}>
                     {asset.name}
                   </p>
-                  <div className="flex items-center gap-1.5 text-[10px] text-[var(--text-muted)] mt-0.5">
+                  <div className="flex items-center gap-1.5 text-[10px] text-[var(--text-muted)] mt-0.5 flex-wrap">
                     <span className="font-semibold text-[var(--text-secondary)]">{asset.format}</span>
                     <span>·</span>
                     <span className="tabular-nums">{formatDuration(asset.duration)}</span>
@@ -166,20 +179,21 @@ export const AudioLibraryPanel: React.FC<AudioLibraryPanelProps> = ({
                   </div>
                 </div>
 
-                <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="flex items-center gap-1 shrink-0 ml-1 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
                   <Tooltip content="Add to Timeline">
                     <button
                       onClick={() => onAddClipToTimeline(asset.id)}
-                      className="p-1 rounded text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-raised)]"
+                      className="flex items-center gap-1 px-1.5 py-1 md:p-1 rounded text-[var(--primary-accent)] md:text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-raised)] bg-[var(--surface-base)] md:bg-transparent border border-[var(--border-default)] md:border-transparent transition-all"
                       aria-label="Add to Timeline"
                     >
                       <Plus className="w-3.5 h-3.5" />
+                      <span className="md:hidden text-[10px] font-semibold">Add</span>
                     </button>
                   </Tooltip>
                   <Tooltip content="Delete File">
                     <button
                       onClick={() => onDeleteAsset(asset.id)}
-                      className="p-1 rounded text-[var(--text-secondary)] hover:text-[var(--destructive)] hover:bg-[var(--surface-raised)]"
+                      className="p-1 rounded text-[var(--text-secondary)] hover:text-[var(--destructive)] hover:bg-[var(--surface-raised)] transition-colors"
                       aria-label="Delete File"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
@@ -204,8 +218,9 @@ export const AudioLibraryPanel: React.FC<AudioLibraryPanelProps> = ({
 
       {/* Drag instruction footer */}
       {assets.length > 0 && (
-        <div className="p-2.5 border-t border-[var(--border-default)] text-[10px] text-[var(--text-muted)] text-center">
-          Drag audio cards onto any timeline track
+        <div className="p-2.5 border-t border-[var(--border-default)] text-[10px] text-[var(--text-muted)] text-center shrink-0">
+          <span className="hidden md:inline">Drag audio cards onto any timeline track</span>
+          <span className="md:hidden">Tap &quot;Add&quot; to place clip on timeline</span>
         </div>
       )}
     </div>
