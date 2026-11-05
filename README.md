@@ -161,22 +161,34 @@ bun run preview
 
 ## Deployment
 
-The project is structured as a static Single Page Application (SPA) and can be deployed instantly to any static hosting provider.
+The project is structured as a static Single Page Application (SPA) and is pre-configured for seamless deployment to **Cloudflare Pages**.
 
-### Vercel
-Configuration is pre-configured via `vercel.json`:
+### Cloudflare Pages (Recommended)
+
+#### Option 1: Git Integration (Continuous Deployment)
+1. In the [Cloudflare Dashboard](https://dash.cloudflare.com/), navigate to **Workers & Pages** > **Create application** > **Pages** > **Connect to Git**.
+2. Select your repository: `arshadakl/audio-editor`.
+3. Configure the build settings:
+   - **Framework preset**: `Vite`
+   - **Build command**: `bun run build` (or `npm run build`)
+   - **Build output directory**: `dist`
+   - **Root directory**: `/`
+4. Click **Save and Deploy**. Cloudflare Pages will automatically trigger a new deployment on every commit to `main`.
+
+#### Option 2: Direct CLI Deployment via Wrangler
+Deploy directly from your terminal using the built-in Wrangler CLI:
 ```bash
-npx vercel deploy --prod
+# Build the production bundle
+bun run build
+
+# Deploy to Cloudflare Pages
+bun run pages:deploy
+# or: npx wrangler pages deploy dist
 ```
 
-### Netlify
-Pre-configured with `public/_redirects`:
-```bash
-npx netlify deploy --prod --dir=dist
-```
-
-### GitHub Pages
-Set the base path in `vite.config.ts` if needed (default is `./` which supports subfolder hosting out of the box), build the project, and publish `dist/`.
+#### SPA Routing & Asset Caching
+- **`public/_redirects`**: Automatically routes all SPA navigation requests to `/index.html` (HTTP 200).
+- **`public/_headers`**: Enforces strict security headers (`X-Frame-Options`, `X-Content-Type-Options`) and configures long-term immutable caching (`max-age=31536000`) for all `/assets/*` bundles.
 
 ---
 
